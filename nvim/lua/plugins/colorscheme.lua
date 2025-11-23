@@ -25,7 +25,7 @@ return {
 
       -- Also setup latte variant
       require("catppuccin").setup({
-        flavour = "latte",
+        flavour = "mocha", -- Default variant
         transparent_background = false, -- Light themes usually need background
         term_colors = true,
       })

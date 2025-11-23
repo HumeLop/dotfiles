@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 -- WSL clipboard configuration
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
-    name = "win32yank",                  -- Use win32yank for clipboard operations
+    name = "win32yank", -- Use win32yank for clipboard operations
     copy = {
       ["+"] = "win32yank.exe -i --crlf", -- Command to copy to the system clipboard
       ["*"] = "win32yank.exe -i --crlf", -- Command to copy to the primary clipboard
@@ -26,7 +26,7 @@ if vim.fn.has("wsl") == 1 then
       ["+"] = "win32yank.exe -o --lf", -- Command to paste from the system clipboard
       ["*"] = "win32yank.exe -o --lf", -- Command to paste from the primary clipboard
     },
-    cache_enabled = false,             -- Disable clipboard caching
+    cache_enabled = false, -- Disable clipboard caching
   }
 end
 
@@ -34,7 +34,7 @@ end
 require("lazy").setup({
   spec = {
     -- Add LazyVim and import its plugins
-    { "LazyVim/LazyVim",                                     import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- Import any extra modules here
     -- Editor plugins
     { import = "lazyvim.plugins.extras.editor.harpoon2" },
@@ -75,18 +75,18 @@ require("lazy").setup({
     { import = "plugins" },
   },
   defaults = {
-    -- Custom plugins inherit lazy=false to load at startup (colorschemes, UI, etc.)
-    -- Individual plugins can override this with their own lazy=true setting
+    -- Custom plugins inherit lazy=true to load only when needed (better performance)
+    -- Individual plugins can override this with their own lazy=false setting
     -- LazyVim core plugins are always lazy-loaded appropriately
-    lazy = false,
+    lazy = true,
     -- Use latest git commits (more stable than old releases for most plugins)
     -- Specific plugins can pin versions if needed (e.g., version = "1.2.3")
-    version = false,                                       -- Always use the latest git commit
+    version = false, -- Always use the latest git commit
   },
   install = { colorscheme = { "tokyonight", "habamax" } }, -- Specify colorschemes to install
   checker = {
-    enabled = true,                                        -- Automatically check for plugin updates
-    frequency = 86400,                                     -- Check every 24 hours (less interruptions, still stays updated)
+    enabled = true, -- Automatically check for plugin updates
+    frequency = 86400, -- Check every 24 hours (less interruptions, still stays updated)
   },
   performance = {
     cache = {

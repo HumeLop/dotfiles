@@ -6,7 +6,7 @@ local M = {}
 
 -- Map Omarchy themes to Neovim colorschemes
 local theme_map = {
-  ["catppuccin"] = "catppuccin",
+  ["catppuccin"] = "catppuccin-mocha",  -- Use mocha variant for dark theme
   ["catppuccin-latte"] = "catppuccin-latte",
   ["kanagawa"] = "kanagawa",
   ["rose-pine"] = "rose-pine",
@@ -16,9 +16,9 @@ local theme_map = {
   ["gruvbox"] = "gruvbox",
   ["everforest"] = "everforest",
   ["matte-black"] = "gentleman-kanagawa-blur", -- Fallback to your default
-  ["osaka-jade"] = "gentleman-kanagawa-blur",  -- Fallback
-  ["flexoki-light"] = "catppuccin-latte",      -- Fallback to light theme
-  ["ristretto"] = "gentleman-kanagawa-blur",   -- Fallback
+  ["osaka-jade"] = "gentleman-kanagawa-blur", -- Fallback
+  ["flexoki-light"] = "catppuccin-latte", -- Fallback to light theme
+  ["ristretto"] = "gentleman-kanagawa-blur", -- Fallback
 }
 
 -- Get current Omarchy theme name

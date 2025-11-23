@@ -6,6 +6,7 @@
 return {
   "zbirenbaum/copilot.lua",
   optional = true,
+  event = "InsertEnter",   -- Load only when entering insert mode
   build = ":Copilot auth", -- Ensure authentication after install/update
   opts = {
     suggestion = {

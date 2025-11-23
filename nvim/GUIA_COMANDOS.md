@@ -306,10 +306,10 @@ README.md                    → README del proyecto
 
 ## 📚 Recursos Adicionales
 
-- **LazyVim Docs:** https://www.lazyvim.org/
-- **Conform.nvim:** https://github.com/stevearc/conform.nvim
-- **Oil.nvim:** https://github.com/stevearc/oil.nvim
-- **Blink.cmp:** https://github.com/saghen/blink.cmp
+- **LazyVim Docs:** <https://www.lazyvim.org/>
+- **Conform.nvim:** <https://github.com/stevearc/conform.nvim>
+- **Oil.nvim:** <https://github.com/stevearc/oil.nvim>
+- **Blink.cmp:** <https://github.com/saghen/blink.cmp>
 
 ---
 

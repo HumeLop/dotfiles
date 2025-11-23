@@ -16,6 +16,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       return
     end
 
+    -- Exclude specific files from formatting
+    if vim.fn.fnamemodify(args.file, ":t") == "bun.lock" then
+      return
+    end
+
     -- Try conform.nvim first (if available)
     local conform_ok, conform = pcall(require, "conform")
     if conform_ok then
@@ -153,8 +158,12 @@ vim.api.nvim_create_user_command("FormatInfo", function()
     "",
     "Filetype: " .. filetype,
     "",
-    "Conform formatters: " ..
-    (vim.tbl_count(conform_formatters) > 0 and table.concat(vim.tbl_map(function(f) return f.name end, conform_formatters), ", ") or "None"),
+    "Conform formatters: " .. (vim.tbl_count(conform_formatters) > 0 and table.concat(
+      vim.tbl_map(function(f)
+        return f.name
+      end, conform_formatters),
+      ", "
+    ) or "None"),
     "",
     "LSP formatters: " .. (vim.tbl_count(lsp_formatters) > 0 and table.concat(lsp_formatters, ", ") or "None"),
   }
@@ -179,7 +188,12 @@ vim.api.nvim_create_user_command("Format", function()
   if conform_ok then
     local formatters = conform.list_formatters(buf)
     if #formatters > 0 then
-      vim.notify("Formateando con: " .. table.concat(vim.tbl_map(function(f) return f.name end, formatters), ", "))
+      vim.notify("Formateando con: " .. table.concat(
+        vim.tbl_map(function(f)
+          return f.name
+        end, formatters),
+        ", "
+      ))
       conform.format({ bufnr = buf, timeout_ms = 3000 })
       return
     end
@@ -241,11 +255,7 @@ vim.api.nvim_create_user_command("PluginClean", function(opts)
     return
   end
 
-  local choice = vim.fn.confirm(
-    "¿Eliminar y reinstalar el plugin '" .. plugin_name .. "'?",
-    "&Sí\n&No",
-    2
-  )
+  local choice = vim.fn.confirm("¿Eliminar y reinstalar el plugin '" .. plugin_name .. "'?", "&Sí\n&No", 2)
 
   if choice == 1 then
     vim.fn.delete(plugin_path, "rf")
@@ -259,5 +269,5 @@ end, {
     local plugins = vim.fn.readdir(lazy_path)
     return plugins
   end,
-  desc = "Clean and reinstall a plugin with conflicts"
+  desc = "Clean and reinstall a plugin with conflicts",
 })
