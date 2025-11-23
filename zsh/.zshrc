@@ -9,11 +9,8 @@ export SUDO_EDITOR="$EDITOR"
 # Temas
 export BAT_THEME=ansi
 
-# PATH consolidado (solo agrega directorios que existen)
-export PATH="$HOME/.local/share/omarchy/bin:$PATH"
-[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
-[ -d "$HOME/.bun/bin" ] && export PATH="$HOME/.bun/bin:$PATH"
-[ -d "/usr/local/go/bin" ] && export PATH="/usr/local/go/bin:$PATH"
+# PATH consolidado
+export PATH="$HOME/.cargo/bin:$HOME/.bun/bin:$HOME/.local/share/omarchy/bin:/usr/local/go/bin:${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
@@ -40,12 +37,12 @@ setopt hist_ignore_space
 autoload -Uz compinit
 compinit
 
-# Prompt y navegación (solo si están instalados)
-command -v starship &>/dev/null && eval "$(starship init zsh)"
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+# Prompt y navegación
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 # Gestores de versiones
-[ -f "$HOME/.local/bin/mise" ] && eval "$(~/.local/bin/mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
@@ -58,21 +55,16 @@ source <(fzf --zsh)
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 
-# Lazy load carapace (solo cuando se usa TAB y si está instalado)
-if command -v carapace &>/dev/null; then
-  _carapace_lazy_load() {
-    unfunction _carapace_lazy_load
-    source <(carapace _carapace)
-  }
-  compdef _carapace_lazy_load carapace
-fi
+# Lazy load carapace (solo cuando se usa TAB)
+_carapace_lazy_load() {
+  unfunction _carapace_lazy_load
+  source <(carapace _carapace)
+}
+compdef _carapace_lazy_load carapace
 
-# Plugins de Zsh (solo si están instalados)
-[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
-  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Plugins de Zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Completados específicos - Carga diferida
 _bun_lazy_load() {
@@ -89,8 +81,8 @@ _ng_lazy_load() {
 compdef _bun_lazy_load bun
 compdef _ng_lazy_load ng
 
-# Atuin - Solo si está instalado
-command -v atuin &>/dev/null && eval "$(atuin init zsh)"
+# Atuin - Carga al final o comenta si no lo usas mucho
+eval "$(atuin init zsh)"
 
 # =======================================================
 # === ALIASES ===
@@ -254,3 +246,27 @@ img2png() {
 }
 
 export PATH=$PATH:/home/humelop/.spicetify
+
+# === Zellij Configuration ===
+# Función helper: sincroniza colores automáticamente antes de abrir layout
+_zj() {
+    ~/.config/zellij/update-all-layouts.sh > /dev/null 2>&1
+    zellij --layout "$1"
+}
+
+# Layouts por tecnología (con auto-sync de colores)
+alias zj-pro='~/.config/zellij/update-all-layouts.sh > /dev/null 2>&1 && zellij --layout work-pro'
+alias zj='_zj default'
+alias zj-ng='_zj angular'
+alias zj-react='_zj react'
+alias zj-rn='_zj react-native'
+alias zj-django='_zj django'
+
+# Utilidades
+alias zj-sync='~/.config/zellij/sync-theme.sh'
+alias zj-list='ls -1 ~/.config/zellij/layouts/ | sed "s/.kdl//"'
+function zj-edit() { ${EDITOR:-nvim} ~/.config/zellij/layouts/"$1".kdl }
+function zj-new() { zellij --session "$1" }
+
+# === Keychain SSH ===
+eval $(keychain --eval --quiet id_ed25519)

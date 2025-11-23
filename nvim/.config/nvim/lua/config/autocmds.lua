@@ -271,3 +271,20 @@ end, {
   end,
   desc = "Clean and reinstall a plugin with conflicts",
 })
+
+-- Refresh smear on colorscheme change
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    -- Re-apply smear with a delay to ensure colorscheme is fully loaded
+    vim.defer_fn(function()
+      local smear_ok, smear = pcall(require, "smear-cursor")
+      if smear_ok then
+        smear.setup({
+          enabled = true,
+        })
+      end
+    end, 10)
+  end,
+  desc = "Re-initialize smear on colorscheme change",
+})

@@ -6,7 +6,7 @@ local M = {}
 
 -- Map Omarchy themes to Neovim colorschemes
 local theme_map = {
-  ["catppuccin"] = "catppuccin-mocha",  -- Use mocha variant for dark theme
+  ["catppuccin"] = "catppuccin-mocha", -- Use mocha variant for dark theme
   ["catppuccin-latte"] = "catppuccin-latte",
   ["kanagawa"] = "kanagawa",
   ["rose-pine"] = "rose-pine",
@@ -15,6 +15,10 @@ local theme_map = {
   ["nord"] = "nord",
   ["gruvbox"] = "gruvbox",
   ["everforest"] = "everforest",
+  ["arc-blueberry"] = "arc-blueberry",
+  ["hackerman"] = "hackerman",
+  ["bauhaus"] = "bauhaus-nvim",
+  ["ethereal"] = "ethereal",
   ["matte-black"] = "gentleman-kanagawa-blur", -- Fallback to your default
   ["osaka-jade"] = "gentleman-kanagawa-blur", -- Fallback
   ["flexoki-light"] = "catppuccin-latte", -- Fallback to light theme

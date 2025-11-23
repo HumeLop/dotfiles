@@ -16,7 +16,7 @@ return {
         command = "sqlfluff",
         args = { "format", "--dialect=postgres", "--nocolor", "-" },
         stdin = true,
-        require_cwd = false,   -- No requiere encontrar directorio raíz
+        require_cwd = false, -- No requiere encontrar directorio raíz
         exit_codes = { 0, 1 }, -- 1 puede indicar cambios aplicados
       },
     },

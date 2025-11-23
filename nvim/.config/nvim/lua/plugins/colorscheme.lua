@@ -146,6 +146,28 @@ return {
       })
     end,
   },
+  -- Bauhaus (Omarchy: bauhaus)
+  {
+    "somerocketeer/bauhaus.nvim",
+    name = "bauhaus-nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("bauhaus").setup({ transparent = false })
+      vim.cmd.colorscheme("bauhaus")
+    end,
+  },
+  -- ethereal (Omarchy: ethereal)
+  {
+    "presindent/ethereal.nvim",
+    name = "ethereal",
+    lazy = true,
+    priority = 1000,
+    opts = {
+      transparent_background = true,
+    },
+  },
+
   {
     "LazyVim/LazyVim",
     opts = {
