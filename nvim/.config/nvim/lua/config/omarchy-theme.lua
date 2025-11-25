@@ -10,17 +10,17 @@ local theme_map = {
   ["catppuccin-latte"] = "catppuccin-latte",
   ["kanagawa"] = "kanagawa",
   ["rose-pine"] = "rose-pine",
-  ["rose-pine-dark"] = "rose-pine-dark",
+  ["rose-pine-dark"] = "rose-pine-moon",
   ["tokyo-night"] = "tokyonight",
   ["nord"] = "nord",
   ["gruvbox"] = "gruvbox",
   ["everforest"] = "everforest",
   ["arc-blueberry"] = "arc-blueberry",
   ["hackerman"] = "hackerman",
-  ["bauhaus"] = "bauhaus-nvim",
+  ["bauhaus"] = "bauhaus",
   ["ethereal"] = "ethereal",
-  ["matte-black"] = "gentleman-kanagawa-blur", -- Fallback to your default
-  ["osaka-jade"] = "gentleman-kanagawa-blur", -- Fallback
+  ["matte-black"] = "matteblack", -- Fallback to your default
+  ["osaka-jade"] = "bamboo", -- Fallback
   ["flexoki-light"] = "catppuccin-latte", -- Fallback to light theme
   ["ristretto"] = "gentleman-kanagawa-blur", -- Fallback
 }
@@ -99,6 +99,13 @@ function M.setup(opts)
   vim.api.nvim_create_user_command("OmarchyThemeSync", function()
     M.sync_theme({ silent = false })
   end, { desc = "Sync Neovim colorscheme with Omarchy theme" })
+
+  -- Create command to toggle auto-sync
+  vim.api.nvim_create_user_command("OmarchyThemeToggle", function()
+    auto_sync = not auto_sync
+    local status = auto_sync and "enabled" or "disabled"
+    vim.notify("🔄 Omarchy theme auto-sync " .. status, vim.log.levels.INFO)
+  end, { desc = "Toggle Omarchy theme auto-sync" })
 
   -- Create command to show current mapping
   vim.api.nvim_create_user_command("OmarchyThemeInfo", function()

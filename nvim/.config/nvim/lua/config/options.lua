@@ -32,9 +32,9 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 
 -- Performance improvements
-vim.opt.updatetime = 250   -- Balanced speed for completion and diagnostics (200ms may be too aggressive)
+vim.opt.updatetime = 250 -- Balanced speed for completion and diagnostics (200ms may be too aggressive)
 vim.opt.redrawtime = 10000 -- Allow more time for syntax highlighting
 
 -- Better search
 vim.opt.ignorecase = true -- Ignore case in search
-vim.opt.smartcase = true  -- Unless search contains uppercase
+vim.opt.smartcase = true -- Unless search contains uppercase

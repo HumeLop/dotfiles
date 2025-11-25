@@ -90,27 +90,12 @@ return {
       terminal_colors = true,
     },
   },
-  -- Rose Pine (Omarchy: rose-pine)
+  -- Rose Pine (variants: rose-pine, rose-pine-moon, rose-pine-dawn)
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    lazy = true,
     priority = 1000,
     opts = {
-      variant = "main",
-      disable_background = true,
-      disable_float_background = true,
-    },
-  },
-  -- Rose Pine (Omarchy: rose-pine-dark)
-  {
-    "rose-pine/neovim",
-    name = "rose-pine-dark",
-    variant = "moon",
-    lazy = true,
-    priority = 1000,
-    opts = {
-      variant = "main",
       disable_background = true,
       disable_float_background = true,
     },
@@ -150,7 +135,7 @@ return {
   {
     "somerocketeer/bauhaus.nvim",
     name = "bauhaus-nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       require("bauhaus").setup({ transparent = false })
@@ -166,6 +151,25 @@ return {
     opts = {
       transparent_background = true,
     },
+  },
+  -- Osaka Jade (Omarchy: osaka-jade)
+  {
+    "ribru17/bamboo.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("bamboo").setup({})
+      require("bamboo").load()
+    end,
+  },
+  -- Matte Black (Omarchy: matte-black)
+  {
+    "tahayvr/matteblack.nvim",
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme matteblack")
+    end,
   },
 
   {
