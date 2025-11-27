@@ -1,7 +1,7 @@
 -- Explicitly add config directory to Lua's package path to handle symlinks
-local config_path = vim.fn.stdpath('config')
-package.path = package.path .. ';' .. config_path .. '/lua/?.lua'
-package.path = package.path .. ';' .. config_path .. '/lua/?/init.lua'
+local config_path = vim.fn.stdpath("config")
+package.path = package.path .. ";" .. config_path .. "/lua/?.lua"
+package.path = package.path .. ";" .. config_path .. "/lua/?/init.lua"
 
 -- Performance optimizations (load first)
 require("config.performance").setup()
@@ -15,5 +15,5 @@ require("config.lazy")
 -- Sync with Omarchy desktop theme
 require("config.omarchy-theme").setup({
   auto_sync = true, -- Automatically sync on startup
-  silent = true,    -- Don't show notifications on startup
+  silent = true, -- Don't show notifications on startup
 })

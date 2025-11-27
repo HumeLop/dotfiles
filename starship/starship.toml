@@ -84,7 +84,7 @@ format = '[[($all_status$ahead_behind )](fg:black bg:green)]($style)'
 [nodejs]
 symbol = ""
 style = "bg:cyan"
-format ='[[ $symbol( $version) ](fg:black bg:cyan)]($style)'
+format = '[[ $symbol( $version) ](fg:black bg:cyan)]($style)'
 [c]
 symbol = " "
 style = "bg:cyan"

@@ -19,6 +19,7 @@ local theme_map = {
   ["hackerman"] = "hackerman",
   ["bauhaus"] = "bauhaus",
   ["ethereal"] = "ethereal",
+  ["rainynight"] = "tokyonight-night",
   ["matte-black"] = "matteblack", -- Fallback to your default
   ["osaka-jade"] = "bamboo", -- Fallback
   ["flexoki-light"] = "catppuccin-latte", -- Fallback to light theme
