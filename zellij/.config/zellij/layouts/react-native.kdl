@@ -1,0 +1,102 @@
+layout {
+    // Pestaña para el editor de código
+    tab name="Code" focus=true {
+        pane {
+            command "nvim"
+            args "."
+        }
+    }
+
+    // Pestaña para el servidor de desarrollo de Expo
+    tab name="Expo Dev" {
+        pane {
+            command "bunx"
+            args "expo" "start"
+        }
+    }
+
+    // Pestaña para una terminal general
+    tab name="Terminal" {
+        pane
+    }
+
+    // Pestaña para Git
+    tab name="Git" {
+        pane command="lazygit"
+    }
+
+    // Plantilla para la barra de estado en todas las pestañas nuevas
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+               format_left  "#[fg=#9ece6a,bold,fg=#7aa2f7]#[bg=#7aa2f7,fg=#1a1b26,bold] {session} #[bg=#24283b] {mode}#[bg=#24283b] {tabs}"
+              format_right  "#[bg=#24283b,fg=#bb9af7]#[fg=#1a1b26,bg=#bb9af7] #[bg=#414868,fg=#bb9af7,bold] {command_user}@{command_host}#[bg=#24283b,fg=#414868]#[bg=#24283b,fg=#f7768e]#[bg=#f7768e,fg=#1a1b26]󰃭 #[bg=#414868,fg=#f7768e,bold] {datetime}#[bg=#24283b,fg=#414868]"
+              format_center ""
+              format_space  "#[bg=#24283b]"
+              format_hide_on_overlength "true"
+              format_precedence "lrc"
+
+              border_enabled  "false"
+              border_char     "─"
+              border_format   "#[fg=#e0af68]{char}"
+              border_position "top"
+
+              hide_frame_for_single_pane "true"
+
+              mode_normal        "#[bg=#9ece6a,fg=#1a1b26,bold] NORMAL#[bg=#24283b,fg=#9ece6a]"
+              mode_tmux          "#[bg=#bb9af7,fg=#1a1b26,bold] TMUX#[bg=#24283b,fg=#bb9af7]"
+              mode_locked        "#[bg=#f7768e,fg=#1a1b26,bold] LOCKED#[bg=#24283b,fg=#f7768e]"
+              mode_pane          "#[bg=#2ac3de,fg=#1a1b26,bold] PANE#[bg=#24283b,fg=teal]"
+              mode_tab           "#[bg=#2ac3de,fg=#1a1b26,bold] TAB#[bg=#24283b,fg=#2ac3de]"
+              mode_scroll        "#[bg=#bb9af7,fg=#1a1b26,bold] SCROLL#[bg=#24283b,fg=#bb9af7]"
+              mode_enter_search  "#[bg=#bb9af7,fg=#1a1b26,bold] ENT-SEARCH#[bg=#24283b,fg=#bb9af7]"
+              mode_search        "#[bg=#bb9af7,fg=#1a1b26,bold] SEARCHARCH#[bg=#24283b,fg=#bb9af7]"
+              mode_resize        "#[bg=#e0af68,fg=#1a1b26,bold] RESIZE#[bg=#24283b,fg=#e0af68]"
+              mode_rename_tab    "#[bg=#e0af68,fg=#1a1b26,bold] RENAME-TAB#[bg=#24283b,fg=#e0af68]"
+              mode_rename_pane   "#[bg=#e0af68,fg=#1a1b26,bold] RENAME-PANE#[bg=#24283b,fg=#e0af68]"
+              mode_move          "#[bg=#e0af68,fg=#1a1b26,bold] MOVE#[bg=#24283b,fg=#e0af68]"
+              mode_session       "#[bg=#bb9af7,fg=#1a1b26,bold] SESSION#[bg=#24283b,fg=#bb9af7]"
+              mode_prompt        "#[bg=#bb9af7,fg=#1a1b26,bold] PROMPT#[bg=#24283b,fg=#bb9af7]"
+
+              tab_normal              "#[bg=#24283b,fg=#7aa2f7]#[bg=#7aa2f7,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#7aa2f7,bold] {name}{floating_indicator}#[bg=#24283b,fg=#414868]"
+              tab_normal_fullscreen   "#[bg=#24283b,fg=#7aa2f7]#[bg=#7aa2f7,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#7aa2f7,bold] {name}{fullscreen_indicator}#[bg=#24283b,fg=#414868]"
+              tab_normal_sync         "#[bg=#24283b,fg=#7aa2f7]#[bg=#7aa2f7,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#7aa2f7,bold] {name}{sync_indicator}#[bg=#24283b,fg=#414868]"
+              tab_active              "#[bg=#24283b,fg=#ff9e64]#[bg=#ff9e64,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#ff9e64,bold] {name}{floating_indicator}#[bg=#24283b,fg=#414868]"
+              tab_active_fullscreen   "#[bg=#24283b,fg=#ff9e64]#[bg=#ff9e64,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#ff9e64,bold] {name}{fullscreen_indicator}#[bg=#24283b,fg=#414868]"
+              tab_active_sync         "#[bg=#24283b,fg=#ff9e64]#[bg=#ff9e64,fg=#1a1b26,bold]{index} #[bg=#414868,fg=#ff9e64,bold] {name}{sync_indicator}#[bg=#24283b,fg=#414868]"
+              tab_separator           "#[bg=#24283b] "
+
+              tab_sync_indicator       " "
+              tab_fullscreen_indicator " 󰊓"
+              tab_floating_indicator   " 󰹙"
+
+              notification_format_unread "#[bg=#24283b,fg=#e0af68]#[bg=#e0af68,fg=#1a1b26] #[bg=#414868,fg=#e0af68] {message}#[bg=#24283b,fg=#e0af68]"
+              notification_format_no_notifications ""
+              notification_show_interval "10"
+
+              command_host_command    "uname -n"
+              command_host_format     "{stdout}"
+              command_host_interval   "0"
+              command_host_rendermode "static"
+
+              command_user_command    "whoami"
+              command_user_format     "{stdout}"
+              command_user_interval   "10"
+              command_user_rendermode "static"
+
+              command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+              command_git_branch_format      "#[fg=#9ece6a] {stdout} "
+              command_git_branch_interval    "10"
+              command_git_branch_rendermode  "static"
+
+              datetime        "#[fg=#7E9CD8,bold] {format} "
+              datetime_format "%Y-%m-%d 󰅐 %I:%M %p"
+              datetime_timezone "America/Mexico_City"
+            }
+        }
+         children
+         pane size=1 borderless=true  {
+          plugin location="zellij:status-bar"
+        }
+    }
+}
